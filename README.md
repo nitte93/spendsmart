@@ -3,6 +3,10 @@
 # ssh
 ssh -i ~/Downloads/LightsailDefaultKey-us-east-1.pem bitnami@67.202.58.96
 
+# v env
+python3 -m venv env 
+source env/bin/activate
+
 # postgres
 Installation Directory: /Library/PostgreSQL/16
 Server Installation Directory: /Library/PostgreSQL/16
