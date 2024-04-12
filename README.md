@@ -60,6 +60,13 @@ python3 -m django --version
 
 sudo /opt/bitnami/ctlscript.sh restart apache
 
+// users running apache servr
+ps aux | grep apache
+
+// give write access
+sudo chown -R daemon:root /opt/bitnami/projects/mysite/media/
+sudo chmod -R 755 /opt/bitnami/projects/mysite/media/
+
 python manage.py makemigrations
 
 python manage.py migrate
