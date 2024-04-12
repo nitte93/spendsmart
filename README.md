@@ -30,13 +30,25 @@ sqlparse==0.4.4
 typing_extensions==4.11.0
 
 # run commands
-// to install to bitnami site-packages
-sudo python3 -m pip install django-environ 
-https://docs.djangoproject.com/en/5.0/intro/tutorial02/
 
+// restart apache
+sudo /opt/bitnami/ctlscript.sh restart apache
+
+// apache server error log
 tail -f /opt/bitnami/apache2/logs/error_log 
 
+// apache server access log
+tail -f /opt/bitnami/apache2/logs/access_log 
+
+// apache running modules
 sudo /opt/bitnami/apache/bin/apachectl -M
+
+// to install to bitnami site-packages
+sudo python3 -m pip install django-environ 
+sudo python3 -m pip install djangorestframework django-cors-headers Markdown
+https://docs.djangoproject.com/en/5.0/intro/tutorial02/
+
+
 
 sudo /opt/bitnami/ctlscript.sh status
 
