@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=9ol-e1$th%l5an@z_u^$gbmlp_1t$=m*!cp%b1nx^)t=@u@j^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ['67.202.58.96', "127.0.0.1"]
 
@@ -80,7 +80,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': "/opt/bitnami/apache2/logs/error_log",
+            'filename': "/opt/bitnami/apache2/logs/django_log",
         },
     },
     'loggers': {
