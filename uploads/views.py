@@ -46,6 +46,9 @@ def upload_and_parse_file(request):
                 else:
                     raise ValueError("Unsupported file format")
             except Exception as e:
+                error_msg = f"Error reading file : {e}"
+                logging.error(error_msg)
+
                 return JsonResponse({'success': False, 'errors': 'Error reading file'}, status=400)
 
             errors = []
