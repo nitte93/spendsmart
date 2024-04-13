@@ -46,7 +46,7 @@ def upload_and_parse_file(request):
                 else:
                     raise ValueError("Unsupported file format")
             except Exception as e:
-                return JsonResponse({'success': False, 'errors': 'Invalid request or form data', 'form': form, 'error': f'Error reading file: {str(e)}'}, status=400)
+                return JsonResponse({'success': False, 'errors': 'Error reading file'}, status=400)
 
             errors = []
             for index, row in data.iterrows():

@@ -48,7 +48,8 @@ sudo python3 -m pip install django-environ
 sudo python3 -m pip install djangorestframework django-cors-headers Markdown
 https://docs.djangoproject.com/en/5.0/intro/tutorial02/
 
-
+// all linux users
+ cat /etc/passwd | awk -F':' '{ print $1}' | xargs -n1 groups
 
 sudo /opt/bitnami/ctlscript.sh status
 
