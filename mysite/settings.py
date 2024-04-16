@@ -33,14 +33,17 @@ SECRET_KEY = 'django-insecure-=9ol-e1$th%l5an@z_u^$gbmlp_1t$=m*!cp%b1nx^)t=@u@j^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ['67.202.58.96', "127.0.0.1"]
+ALLOWED_HOSTS = ['67.202.58.96', "127.0.0.1", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    'djoser',
     'uploads',
+    'social_django',
+    'users',
     'corsheaders',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
@@ -63,13 +66,57 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTH_COOKIE = "access"
+# by default djoser access token gets expired after 5 mins, so we will set out cookie expiration also to 4 mins
+AUTH_COOKIE_ACCESS_MAX_AGE= 60 * 5
+#  refresh tokne age is 24 hours
+AUTH_COOKIE_REFRESH_MAX_AGE= 60 * 60 *24
+# needs https connection to send cookie, for local fast, for prod true
+AUTH_COOKIE_SECURE=env('AUTH_COOKIE_SECURE')
+
+# http only flag on cookie
+AUTH_COOKIE_HTTP_ONLY = True
+
+AUTH_COOKIE_PATH="/"
+AUTH_COOKIE_SAMESITE='None'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('GOOGLE_AUTH_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('GOOGLE_AUTH_SECRET_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid'
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
+
+SOCIAL_AUTH_FACEBOOK_KEY = env('FACEBOOK_AUTH_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = env('FACEBOOK_AUTH_SECRET_KEY')
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'email, first_name, last_name'
+}
+
+
 CORS_ALLOW_ALL_ORIGINS = True  # Be cautious with this in production
 
+CORS_ALLOWED_ORIGIN = ['67.202.58.96', "127.0.0.1", "localhost"]
+
+CORS_ALLOW_CREDENTIALS = True
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication'
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'users.authentication.CustomJWTAuthentication'
     ]
 }
 
@@ -174,4 +221,41 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+
+DJOSER = {
+    # 'TOKEN_MODEL': 'rest_framework_simplejwt.tokens.AccessToken',
+    # 'USERNAME_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL':'password/reset/confirm/{uid}/{token}',
+    # 'SEND_ACTIVATION_EMAIL': True,
+    'ACTIVATION_URL': 'activation/{uid}/{token}',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'TOKEN_MODEL': None,
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:3000/auth/google', 'http://localhost:3000/auth/facebook']
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "users.UserAccount"
+
+# email settings
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
+AWS_SES_REGION_NAME= 'us-east-1'
+AWS_SES_FROM_EMAIL='nitte.tiwari1993@gmail.com'
+DEFAULT_FROM_EMAIL=AWS_SES_REGION_NAME
+AWS_SES_ACCESS_KEY_ID='AKIATC7ZEKMBKZFQRJ4O'
+AWS_SES_SECRET_ACCESS_KEY='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'
+USE_SES_V2=True
+
+
+DOMAIN = env("DOMAIN")
+SITE_NAME= env("SITE_NAME")
+# PASSWORD_RESET_CONFIRM_URL='localhost:3000/password/reset/confirm/{uid}/{token}'
+# Additionally, if you are not using the default AWS region of us-east-1,
+# you need to specify a region, like so:
+AWS_SES_REGION_NAME = 'us-east-1'
+AWS_SES_REGION_ENDPOINT = f'email.{AWS_SES_REGION_NAME}.amazonaws.com'
+
+# If you want to use the SESv2 client
+USE_SES_V2 = True
