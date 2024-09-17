@@ -9,7 +9,7 @@ class UploadFileForm(forms.Form):
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = UploadedFile
-        fields = ['file']
+        fields = ['file', 'user']
         # widgets = {
         #     # 'file_name': forms.HiddenInput(),  # Optionally hide this if set automatically
         # }

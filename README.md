@@ -7,6 +7,10 @@ ssh -i ~/Downloads/LightsailDefaultKey-us-east-1.pem bitnami@67.202.58.96
 python3 -m venv env 
 source env/bin/activate
 
+daphne mysite.asgi:application  
+
+python3 manage.py runserver
+
 # postgres
 Installation Directory: /Library/PostgreSQL/16
 Server Installation Directory: /Library/PostgreSQL/16
@@ -53,6 +57,16 @@ https://docs.djangoproject.com/en/5.0/intro/tutorial02/
 
 sudo /opt/bitnami/ctlscript.sh status
 
+sudo  python -m pip install -r requirements.txt 
+
+// drop database
+dropdb -f postgres -U postgres
+
+// connect to database
+ psql -U postgres -d template1
+
+// list databases
+\l
 python3 manage.py runserver
 
 sudo /opt/bitnami/ctlscript.sh restart postgresql
@@ -61,6 +75,18 @@ python3 -m django --version
 
 sudo /opt/bitnami/ctlscript.sh restart apache
 
+// start python shell
+python manage.py shell
+
+// test for email
+from django.core.mail import send_mail
+send_mail('Test Subject', 'Here is the message.', 'from@example.com', ['to@example.com'], fail_silently=False)
+
+
+for email
+ django-ses
+// google oauth2
+https://console.cloud.google.com/apis/credentials?project=spend-smart-420511
 // users running apache servr
 ps aux | grep apache
 

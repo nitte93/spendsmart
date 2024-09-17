@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from users.models import UserAccount
 class UploadedFile(models.Model):
 
     # document_id: Unique identifier for each document.
@@ -7,10 +8,18 @@ class UploadedFile(models.Model):
     # upload_date: The date the document was uploaded.
     # file_name: Name of the file.
     # file_path: Path where the file is stored securely.
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     upload_date = models.DateTimeField(auto_now_add=True)
     file_name = models.CharField(max_length=255)
     # file_path = models.CharField(max_length=255)
     file = models.FileField(upload_to='uploadsDIR/')
+
+    # override the save method to save with the overridden file name
+    def save(self, *args, **kwargs):
+        print("kwargs",kwargs)
+        if 'file_name' in kwargs:
+            self.file_name = kwargs['file_name']
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.file.name
@@ -42,7 +51,7 @@ class Transaction(models.Model):
     # amount: Transaction amount.
     # reference_number: Transaction reference number.
     # additional_details: Any other pertinent information.
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     document = models.ForeignKey(UploadedFile, on_delete=models.CASCADE,default=get_default_document, related_name='transactions')
     transaction_date = models.DateField()
     transaction_name = models.CharField(max_length=255)
