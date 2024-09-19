@@ -21,19 +21,22 @@ class DataFormatter:
         
         if visualization == "scatter":
             try:
-                return self._format_scatter_data(results)
+                return self._format_other_visualizations(visualization, question, sql_query, results)
+                # return self._format_scatter_data(results)
             except Exception as e:
                 return self._format_other_visualizations(visualization, question, sql_query, results)
         
         if visualization == "bar" or visualization == "horizontal_bar":
             try:
-                return self._format_bar_data(results, question)
+                # return self._format_bar_data(results, question)
+                return self._format_other_visualizations(visualization, question, sql_query, results)
             except Exception as e:
                 return self._format_other_visualizations(visualization, question, sql_query, results)
         
         if visualization == "line":
             try:
-                return self._format_line_data(results, question)
+                # return self._format_line_data(results, question)
+                return self._format_other_visualizations(visualization, question, sql_query, results)
             except Exception as e:
                 return self._format_other_visualizations(visualization, question, sql_query, results)
         
@@ -202,8 +205,8 @@ class DataFormatter:
     def _format_other_visualizations(self, visualization, question, sql_query, results):
         instructions = graph_instructions[visualization]
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "You are a Data expert who formats data according to the required needs. You are given the question asked by the user, it's sql query, the result of the query and the format you need to format it in."),
-            ("human", 'For the given question: {question}\n\nSQL query: {sql_query}\n\Result: {results}\n\nUse the following example to structure the data: {instructions}. Just give the json string. Do not format it'),
+            ("system", "You are a Data expert who formats data according to the required needs. You are given the question asked by the user, the sql query, the result of the query, and the instruction to structure the result in."),
+            ("human", 'For the given question: {question}\n\nSQL query: {sql_query}\n\Result: {results}\n\nUse the following instruction example to structure the data: {instructions}. Just give the json string. Do not format it'),
         ])
         response = self.llm_manager.invoke(prompt, question=question, sql_query=sql_query, results=results, instructions=instructions)
             

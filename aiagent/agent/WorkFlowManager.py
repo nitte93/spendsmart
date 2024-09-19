@@ -44,9 +44,16 @@ class WorkflowManager:
         """Run the SQL agent workflow and return the formatted answer and visualization recommendation."""
         app = self.create_workflow().compile()
         result = app.invoke({"question": question, "uuid": uuid})
-        print("result", result)
+        # print("result", result)
         return {
+            "parsed_question": result['parsed_question'],
+            "unique_nouns": result['unique_nouns'],
+            "sql_query": result['sql_query'],
+            "sql_valid": result['sql_valid'],
+            # 'sql_issues': result['sql_issues'],
             "answer": result['answer'],
+            "results": result['results'],
+            # "error": result['error'],
             "visualization": result['visualization'],
             "visualization_reason": result['visualization_reason'],
             "formatted_data_for_visualization": result['formatted_data_for_visualization']

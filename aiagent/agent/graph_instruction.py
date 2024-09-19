@@ -1,94 +1,293 @@
 
 barGraphIntstruction = '''
 
-  Where data is: {
-    labels: string[]
-    values: {\data: number[], label: string}[]
-  }
+Where data is: {
+  data: [
+    {'name': string, 'value1': string | number}, 
+    {'name': string, 'value1': string | number}, 
+    {'name': string, 'value1': string | number},
+    ...
+    ],
+  name: string, // this key represents the meaning of the 'name' key in data array
+  value1: string // this key represents the meaning of the 'value1' key in data array
+  value1?: string // this key represents the meaning of the 'value2' key in data array etc
+  ...
+}
 
 // Examples of usage:
-Each label represents a column on the x axis.
-Each array in values represents a different entity. 
+Each item in data array represents a different entity. 
+The value fields, (value1, value2..) represents columns on the x axis.
+Think of as attributes of that entity.
 
 Here we are looking at average income for each month.
-1. data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-  values: [{data:[21.5, 25.0, 47.5, 64.8, 105.5, 133.2], label: 'Income'}],
+1. {
+    data: [
+      {name: 'Jan', value1: 20}, 
+      {name: 'Feb', value1: 30}, 
+      {name: 'Mar', value1: 40}, 
+      {name: 'Apr', value1: 10},
+      {name: 'May', value1: 45},
+      {name: 'Jun', value1: 10},
+      {name: 'Jul', value1: 80}, 
+      {name: 'Aug', value1: 10},
+      {name: 'Sept',value1: 60}, 
+      {name: 'Oct', value1: 10},
+      {name: 'Nov', value1: 60}, 
+      {name: 'Dec', value1: 10},
+    ],
+    name: "Month",  // this to indicate that the "name" field in data represents the month entity
+    value1: "Average_Income", // this to indicate that the 'value1' field in data item represents the attribute Average_Income of that  entity
 }
 
-Here we are looking at the performance of american and european players for each series. Since there are two entities, we have two arrays in values.
-2. data = {
-  labels: ['series A', 'series B', 'series C'],
-  values: [{data:[10, 15, 20], label: 'American'}, {data:[20, 25, 30], label: 'European'}],
+Here we are looking at average income, and average spends for each month.
+Since there are two attributes for each entity, we have two items in values(value1, value2).
+2. {
+    data: [
+      {name: 'Jan', value1: 20,  value2: 40}, 
+      {name: 'Feb': value1: 30,  value2: 50}, 
+      {name: 'Mar': value1: 40,  value2: 5}, 
+      {name: 'Apr', value1: 10,  value2: 10},
+      {name: 'May', value1: 45,  value2: 15}, 
+      {name: 'Jun', value1: 10,  value2: 55},
+      {name: 'Jul', value1: 80,  value2: 20}, 
+      {name: 'Aug', value1: 10,  value2: 25},
+      {name: 'Sept',value1: 60,  value2: 70}, 
+      {name: 'Oct', value1: 10,  value2: 3},
+      {name: 'Nov', value1: 60,  value2: 4.5}, 
+      {name: 'Dec', value1: 10,  value2: 8},
+    ],
+    name: "Month", // this to indicate that the "name" field in data represents the month entity
+    value1: "Average_Income", // this to indicate that the 'value1' field in data item represents the attribute Average_Income of that  entity
+    value2: "Average_Spends" // this to indicate that the 'value2' field in data item represents the attribute Average_Spends of that  entity
 }
+
+Here we are looking at the performance of american and european players for each series. 
+Since there are two attributes for each entity, we have two items in values(value1, value2).
+3.  {
+      data: [
+        { name: 'series A', value1: 10, value2: 40}, 
+        { name: 'series B', value1: 45, value2: 70}
+      ],
+      name: 'Series', // this to indicate that the "name" field in data represents the series value
+      value1: 'American', // this to indicate that the 'value1' field in data represents the nationality American
+      value2: 'European' // similarly, 'value2' key here indicates that the 'value2' field in data represents nationality European
+    }
+
+4. Here we're looking at average spends over swiggy and zomato for each month
+Since there are two attributes for each entity, we have two items in values(value1, value2).
+2. {
+    data: [
+      {name: 'Jan', value1: 20,  value2: 40}, 
+      {name: 'Feb': value1: 30,  value2: 50}, 
+      {name: 'Mar': value1: 40,  value2: 5}, 
+      {name: 'Apr', value1: 10,  value2: 10},
+      {name: 'May', value1: 45,  value2: 15}, 
+      {name: 'Jun', value1: 10,  value2: 55},
+      {name: 'Jul', value1: 80,  value2: 20}, 
+      {name: 'Aug', value1: 10,  value2: 25},
+      {name: 'Sept',value1: 60,  value2: 70}, 
+      {name: 'Oct', value1: 10,  value2: 3},
+      {name: 'Nov', value1: 60,  value2: 4.5}, 
+      {name: 'Dec', value1: 10,  value2: 8},
+    ],
+    name: "Month", // this to indicate that the "name" field in data represents the month entity
+    value1: "Swiggy_Average_Spends", // this to indicate that the 'value1' field in data item represents the attribute Swiggy's Average Spends of that entity
+    value2: "Zomato_Average_Spends" // this to indicate that the 'value2' field in data item represents the attribute Zomato's Average Spends of that  entity
+}
+
+
 '''
 
 horizontalBarGraphIntstruction = '''
 
-  Where data is: {
-    labels: string[]
-    values: {\data: number[], label: string}[]
-  }
+Where data is: {
+  data: [
+    {'name': string, 'value1': string | number}, 
+    {'name': string, 'value1': string | number}, 
+    {'name': string, 'value1': string | number},
+    ...
+    ],
+  name: string, // this key represents the meaning of the 'name' key in data array
+  value1: string // this key represents the meaning of the 'value1' key in data array
+  value1?: string // this key represents the meaning of the 'value2' key in data array etc
+  ...
+}
 
 // Examples of usage:
-Each label represents a column on the x axis.
-Each array in values represents a different entity. 
+Each item in data array represents a different entity. 
+The value fields, (value1, value2..) represents columns on the x axis.
+Think of as attributes of that entity.
 
 Here we are looking at average income for each month.
-1. data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-  values: [{data:[21.5, 25.0, 47.5, 64.8, 105.5, 133.2], label: 'Income'}],
+1. {
+    data: [
+      {name: 'Jan', value1: 20}, 
+      {name: 'Feb', value1: 30}, 
+      {name: 'Mar', value1: 40}, 
+      {name: 'Apr', value1: 10},
+      {name: 'May', value1: 45},
+      {name: 'Jun', value1: 10},
+      {name: 'Jul', value1: 80}, 
+      {name: 'Aug', value1: 10},
+      {name: 'Sept',value1: 60}, 
+      {name: 'Oct', value1: 10},
+      {name: 'Nov', value1: 60}, 
+      {name: 'Dec', value1: 10},
+    ],
+    name: "Month",  // this to indicate that the "name" field in data represents the month entity
+    value1: "Average_Income", // this to indicate that the 'value1' field in data item represents the attribute Average_Income of that  entity
 }
 
-Here we are looking at the performance of american and european players for each series. Since there are two entities, we have two arrays in values.
-2. data = {
-  labels: ['series A', 'series B', 'series C'],
-  values: [{data:[10, 15, 20], label: 'American'}, {data:[20, 25, 30], label: 'European'}],
+Here we are looking at average income, and average spends for each month.
+Since there are two attributes for each entity, we have two items in values(value1, value2).
+2. {
+    data: [
+      {name: 'Jan', value1: 20,  value2: 40}, 
+      {name: 'Feb': value1: 30,  value2: 50}, 
+      {name: 'Mar': value1: 40,  value2: 5}, 
+      {name: 'Apr', value1: 10,  value2: 10},
+      {name: 'May', value1: 45,  value2: 15}, 
+      {name: 'Jun', value1: 10,  value2: 55},
+      {name: 'Jul', value1: 80,  value2: 20}, 
+      {name: 'Aug', value1: 10,  value2: 25},
+      {name: 'Sept',value1: 60,  value2: 70}, 
+      {name: 'Oct', value1: 10,  value2: 3},
+      {name: 'Nov', value1: 60,  value2: 4.5}, 
+      {name: 'Dec', value1: 10,  value2: 8},
+    ],
+    name: "Month", // this to indicate that the "name" field in data represents the month entity
+    value1: "Average_Income", // this to indicate that the 'value1' field in data item represents the attribute Average_Income of that  entity
+    value2: "Average_Spends" // this to indicate that the 'value2' field in data item represents the attribute Average_Spends of that  entity
 }
+
+Here we are looking at the performance of american and european players for each series. 
+Since there are two attributes for each entity, we have two items in values(value1, value2).
+2.  {
+      data: [
+        { name: 'series A', value1: 10, value2: 40}, 
+        { name: 'series B', value1: 45, value2: 70}
+      ],
+      name: 'Series', // this to indicate that the "name" field in data represents the series value
+      value1: 'American', // this to indicate that the 'value1' field in data represents the nationality American
+      value2: 'European' // similarly, 'value2' key here indicates that the 'value2' field in data represents nationality European
+    }
+
 
 '''
 
 
 lineGraphIntstruction = '''
 
-  Where data is: {
-  xValues: number[] | string[]
-  yValues: { data: number[]; label: string }[]
+Where data is: {
+  data: [{'name': string, 'value1': string | number}, {'name': string, 'value1': string | number}, {'name': string, 'value1': string | number}],
+  name: string, // this key represents the meaning of the 'name' key in data array
+  value1: string // this key represents the meaning of the 'value1' key in data array
 }
 
 // Examples of usage:
 
-Here we are looking at the momentum of a body as a function of mass.
-1. data = {
-  xValues: ['2020', '2021', '2022', '2023', '2024'],
-  yValues: [
-    { data: [2, 5.5, 2, 8.5, 1.5]},
-  ],
+Here we are looking at the average closing balance for each month.
+1. {
+  data: [{ name: "20-07-2023", value1: 530}, {name: "20-08-2023", value1: 700}, {name: "20-09-2023", value1: 300}, ..],
+  name: "month", // this to indicate that the "name" field in data array represents the month value
+  value1: 'Closing_Balance', // this to indicate that the 'value1' field in data represents the closing balance for that month.
+
 }
 
-Here we are looking at the performance of american and european players for each year. Since there are two entities, we have two arrays in yValues.
-2. data = {
-  xValues: ['2020', '2021', '2022', '2023', '2024'],
-  yValues: [
-    { data: [2, 5.5, 2, 8.5, 1.5], label: 'American' },
-    { data: [2, 5.5, 2, 8.5, 1.5], label: 'European' },
-  ],
-}
+Here we are looking at the performance of american and european players for each year. 
+Since there are two entities, we have two value fields in the data array, value1 and value2 respectively
+2.  {
+      data: [{ name: '2020', value1: 2, value2: 2}, {{ name: '2021', value1: 5, value2: 7}}],
+      name: 'year', // this to indicate that the "name" field in data represents the year value
+      value1: 'American', // this to indicate that the 'value1' field in data represents the nationality American
+      value2: 'European' // similarly, 'value2' key here indicates that the 'value2' field in data represents nationality European
+    }
 '''
 
 pieChartIntstruction = '''
 
-  Where data is: {
-    labels: string
-    values: number
-  }[]
+  Where data is: 
+  {
+    data: {
+      pie_chart_1:{
+        data: [
+          { name: string, value: number | string },
+          { name: string, value: number | string },
+          { name: string, value: number | string },
+          { name: string, value: number | string },
+          ...
+        ],
+        label: string
+    },
+    pie_chart_2?:{
+        data: [
+          { name: string, value: number | string },
+          { name: string, value: number | string },
+          { name: string, value: number | string },
+          { name: string, value: number | string },
+          ...
+        ],
+        label: string
+    }
+    }
+  }
 
 // Example usage:
- data = [
-        { id: 0, value: 10, label: 'series A' },
-        { id: 1, value: 15, label: 'series B' },
-        { id: 2, value: 20, label: 'series C' },
+1. Here we are looking at transactions categorised by mode of payment.
+{
+  data: {
+    pie_chart_1: {
+      data: [
+        { name: 'Mode A', value: 400 },
+        { name: 'Mode B', value: 300 },
+        { name: 'Mode C', value: 300 },
+        { name: 'Mode D', value: 200 }, 
+        ...
       ],
+      label: "Transaction categorised by mode of payment"
+    }
+  }
+}
+
+2. Here we are looking at all the transactions categorised by transaction size, Large( > 10000 ), Medium( 2000 - 10000), and Small( < 2000)
+{
+  data: {
+    pie_chart_1: {
+      data: [
+        { name: 'Large', value: 10 },
+        { name: 'Medium', value: 40 },
+        { name: 'Small', value: 50 }
+      ],
+      label: "Transactions categorised by transaction size"
+    }
+  }
+}
+
+
+3. Here we are looking at all the debit and credit transactions categorised by transaction size, Large( > 10000 ), Medium( 2000 - 10000), and Small( < 2000)
+Here we see two separate pie charts, one for debit, and one for credit
+{
+  data: {
+    pie_chart_1: {
+      data: [
+        { name: 'Large', value: 10 },
+        { name: 'Medium', value: 40 },
+        { name: 'Small', value: 50 }
+      ],
+      label: "Debit Transactions categorised by transaction size"
+    },
+    pie_chart_2: {
+      data: [
+        { name: 'Large', value: 1 },
+        { name: 'Medium', value: 2 },
+        { name: 'Small', value: 4 }
+      ],
+      label: "Credit Transactions categorised by transaction size"    
+    }
+  }
+}
+
+
 '''
 
 scatterPlotIntstruction = '''
@@ -142,11 +341,32 @@ data = {
 // Multiple series can be represented, each as an object in the outer array.
 '''
 
+tableInstruction = '''
+where data is: {
+  data: [
+    { key1: string| number,  key2: string| number,  key3: string| number, key4: string| number, key5: string| number, ... },
+    { key1: string| number,  key2: string| number,  key3: string| number, key4: string| number, key5: string| number, ... },
+    { key1: string| number,  key2: string| number,  key3: string| number, key4: string| number, key5: string| number, ... },
+  ]
+}
+Ensure that the output is an array of objects, where each object represents a row in the table.
+
+Example.
+1. Here we are looking to list all the transactions.
+{
+  data: [
+    { transaction_name: "1",  transaction_amount: 400,  transaction_date: "20/4/2023", transaction_type: debit, ... },
+    { transaction_name: "abc",  transaction_amount: 400.4,  transaction_date: "22/4/2023", transaction_type: credit, ... },
+    { transaction_name: "ewe",  transaction_amount: 20,  transaction_date: "20/5/2023", transaction_type: debit, ... },
+  ]
+}
+'''
 
 graph_instructions = {
     "bar": barGraphIntstruction,
-    "horizontal_bar": horizontalBarGraphIntstruction,
+    "horizontalBar": horizontalBarGraphIntstruction,
     "line": lineGraphIntstruction,
     "pie": pieChartIntstruction,
-    "scatter": scatterPlotIntstruction
+    "scatter": scatterPlotIntstruction,
+    "table": tableInstruction
 }

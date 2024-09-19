@@ -102,6 +102,7 @@ class DatabaseManager:
             rows = cursor.fetchall()
             db.close()
 
+            print("execute query result ", rows, query)
             return rows  # Return the fetched results
         except sqlite3.Error as e:
             raise Exception(f"Error executing query: {str(e)}")

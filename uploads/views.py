@@ -183,9 +183,10 @@ def upload_and_parse_excel_to_sql(request):
 
             try:
                 if file.name.endswith('.xlsx') or file.name.endswith('.xls'):
+                    # data = pd.read_excel(file, engine='openpyxl', parse_dates=['transaction_date']) # handle both .xls and .xlsx
                     data = pd.read_excel(file, engine='openpyxl') # handle both .xls and .xlsx
                 elif file.name.endswith('.csv'):
-                    data = pd.read_csv(file)
+                    data = pd.read_csv(file, parse_dates=['transaction_date'])
                 else:
                     raise ValueError("Unsupported file format")
             except Exception as e:
@@ -206,6 +207,18 @@ def upload_and_parse_excel_to_sql(request):
                 logger.error("Connected to sqlite database: %s", sqlite_file_path)
 
                 # write dataframe to sqlite table
+                # Set the first row as the header and keep it in the DataFrame
+                # data.columns = data.iloc[0]  # Set the first row as the header
+                # data = data[1:]  # Remove the header row from the data for processing
+                
+                try:
+                # Parse the date only for the remaining rows
+                    data['transaction_date'] = pd.to_datetime(data['transaction_date'], format="%d/%m/%y").dt.strftime('%Y-%m-%d')
+                except Exception as e:
+                    error_msg = f"Error parsing date in file: {e}"
+                    logging.error(error_msg)
+                    return JsonResponse({'success': False, 'errors': error_msg}, status=400)
+                
                 table_name = "transactions"
                 data.to_sql(table_name, conn, if_exists='replace', index=True)
 
@@ -644,13 +657,19 @@ def run_sql_agent(request, document_name) -> dict:
     user_data = request.data
     question = user_data.get('message', '')
     documendId = user_data.get('documentId', '')
-    logger.error(question, documendId, document_name)
-    result = WorkFlowManager.WorkflowManager().run_sql_agent(question=question, uuid=document_name)
-    print(result)
-    output = {
-        "answer": result["answer"],
-        "visualization": result['answer'],
-        "visualization_reason": result['answer'],
-        "formated_data_for_visualization": result['answer']
-    }
-    return JsonResponse({'transactions': output})
+    # logger.error(question, documendId, document_name)
+    try:
+        result = WorkFlowManager.WorkflowManager().run_sql_agent(question=question, uuid=document_name)
+        # print(result)
+        output = {
+            "message": result["answer"],
+            "visualization": result['visualization'],
+            "visualization_reason": result['visualization_reason'],
+            "formated_data_for_visualization": result['formatted_data_for_visualization'],
+            'sender': 'admin',
+            'complete': result,
+        }
+        return JsonResponse({'success': True, 'data': output}, status=200)
+    except Exception as e:
+        error_msg = "Failed to analyse your request"
+        return JsonResponse({'success': False, 'errors': error_msg}, status=400)
