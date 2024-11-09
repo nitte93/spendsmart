@@ -198,7 +198,9 @@ def upload_and_parse_excel_to_sql(request):
             # prepare to write dataframe into SQLite
             try:
                 # sqlite path
-                sqlite_file_path = f"./uploadsDir/{new_file_name.split(".")[0]}.db"
+                # sqlite_file_path = f"./uploadsDir/{new_file_name.split('.')[0]}.db"
+                base_name = new_file_name.split('.')[0]
+                sqlite_file_path = f"./uploadsDir/{base_name}.db"
                 # os.makedirs(os.path.dirname(sqlite_file_path), exist_ok=True)  # Create directory if it doesn't exist
 
 
