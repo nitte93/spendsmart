@@ -46,8 +46,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include('djoser.urls')),
     path('api/', include('users.urls')),
+    # path('api/', include('djoser.urls.jwt')),
     # path('api/', include('summarizer.urls')),
-    # path('api/', include('djoser.urls.jwt'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

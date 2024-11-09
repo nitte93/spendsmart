@@ -244,7 +244,7 @@ DJOSER = {
     # 'TOKEN_MODEL': 'rest_framework_simplejwt.tokens.AccessToken',
     # 'USERNAME_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
     'PASSWORD_RESET_CONFIRM_URL':'password-reset/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': False,
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,

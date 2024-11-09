@@ -1,0 +1,74 @@
+Give all transactions with swiggy
+0
+: 
+{name: "2023-12-06", value1: 548}
+name
+: 
+"2023-12-06"
+value1
+: 
+548
+1
+: 
+{name: "2023-12-15", value1: 358}
+2
+: 
+{name: "2023-12-19", value1: 305}
+3
+: 
+{name: "2023-12-25", value1: 343}
+4
+: 
+{name: "2024-01-12", value1: 277}
+5
+: 
+{name: "2024-01-18", value1: 350}
+name
+: 
+"transaction_date"
+value1
+: 
+"withdrawn_amount"
+
+
+Not working > why ?
+There are no available records to calculate the average income and average withdrawal for each month.
+SELECT STRFTIME('%Y-%m', `transaction_date`) as month, AVG(`withdrawn_amount`) as average_withdrawal, AVG(`deposit_amount`) as average_deposit
+FROM `transactions`
+WHERE `transaction_date` IS NOT NULL AND `withdrawn_amount` IS NOT NULL AND `deposit_amount` IS NOT NULL AND `transaction_date` != "" AND `withdrawn_amount` != "" AND `deposit_amount` != "" AND `transaction_date` != "N/A" AND `withdrawn_amount` != "N/A" AND `deposit_amount` != "N/A"
+GROUP BY month
+
+
+
+show me the count of debit and credit transactions as bar chart
+data
+: 
+[{name: "Debit", value1: 147}, {name: "Credit", value1: 13}]
+0
+: 
+{name: "Debit", value1: 147}
+1
+: 
+{name: "Credit", value1: 13}
+name
+: 
+"Transaction_Type"
+value1
+: 
+"Count"
+
+
+show me the count of debit and credit transactions for each month as bar chart
+
+show me categorised transaction by their size, Large( > 10000 ), Medium( 2000 - 10000), and Small( < 2000)
+
+Show me the transactions categorised by their size Large( > 10000 ), Medium( 2000 - 10000), and Small( < 2000) as pie chart
+
+Show me debit and credit transactions categorised by their size, Large( > 10000 ), Medium( 2000 - 10000), and Small( < 2000) as pie chart
+
+show me all the transactions with netflix
+
+
+show me the recurring transactions for each month
+
+

@@ -19,8 +19,8 @@ Each item in data array represents a different entity.
 The value fields, (value1, value2..) represents columns on the x axis.
 Think of as attributes of that entity.
 
-Here we are looking at average income for each month.
-1. {
+1. Here we are looking at average income for each month.
+{
     data: [
       {name: 'Jan', value1: 20}, 
       {name: 'Feb', value1: 30}, 
@@ -39,43 +39,46 @@ Here we are looking at average income for each month.
     value1: "Average_Income", // this to indicate that the 'value1' field in data item represents the attribute Average_Income of that  entity
 }
 
-Here we are looking at average income, and average spends for each month.
-Since there are two attributes for each entity, we have two items in values(value1, value2).
-2. {
+2. Here we are looking at average income, and average spends for each month.
+Since there are multiple attributes for each entity, we have multiple items in values(value1, value2).
+ {
     data: [
-      {name: 'Jan', value1: 20,  value2: 40}, 
-      {name: 'Feb': value1: 30,  value2: 50}, 
-      {name: 'Mar': value1: 40,  value2: 5}, 
-      {name: 'Apr', value1: 10,  value2: 10},
-      {name: 'May', value1: 45,  value2: 15}, 
-      {name: 'Jun', value1: 10,  value2: 55},
-      {name: 'Jul', value1: 80,  value2: 20}, 
-      {name: 'Aug', value1: 10,  value2: 25},
-      {name: 'Sept',value1: 60,  value2: 70}, 
-      {name: 'Oct', value1: 10,  value2: 3},
-      {name: 'Nov', value1: 60,  value2: 4.5}, 
-      {name: 'Dec', value1: 10,  value2: 8},
+      {name: 'Jan', value1: 20,  value2: 40, ...}, 
+      {name: 'Feb': value1: 30,  value2: 50, ...}, 
+      {name: 'Mar': value1: 40,  value2: 5, ...}, 
+      {name: 'Apr', value1: 10,  value2: 10, ...},
+      {name: 'May', value1: 45,  value2: 15, ...}, 
+      {name: 'Jun', value1: 10,  value2: 55, ...},
+      {name: 'Jul', value1: 80,  value2: 20, ...}, 
+      {name: 'Aug', value1: 10,  value2: 25, ...},
+      {name: 'Sept',value1: 60,  value2: 70, ...}, 
+      {name: 'Oct', value1: 10,  value2: 3, ...},
+      {name: 'Nov', value1: 60,  value2: 4.5, ...}, 
+      {name: 'Dec', value1: 10,  value2: 8, ...},
     ],
     name: "Month", // this to indicate that the "name" field in data represents the month entity
     value1: "Average_Income", // this to indicate that the 'value1' field in data item represents the attribute Average_Income of that  entity
     value2: "Average_Spends" // this to indicate that the 'value2' field in data item represents the attribute Average_Spends of that  entity
+    ...
 }
 
-Here we are looking at the performance of american and european players for each series. 
-Since there are two attributes for each entity, we have two items in values(value1, value2).
-3.  {
+3. Here we are looking at recurring transactions for each month. 
+Since there can be multiple transactions for each month, we have multiple items in values(value1, value2).
+{
       data: [
-        { name: 'series A', value1: 10, value2: 40}, 
-        { name: 'series B', value1: 45, value2: 70}
+        { name: 'June', value1: 'Transaction 1', value2: "Transaction 2", ...}, 
+        { name: 'July', value1: "Transaction 1", value2: "Transaction 2", ...}
+        ...
       ],
-      name: 'Series', // this to indicate that the "name" field in data represents the series value
-      value1: 'American', // this to indicate that the 'value1' field in data represents the nationality American
-      value2: 'European' // similarly, 'value2' key here indicates that the 'value2' field in data represents nationality European
+      name: 'Month', // this to indicate that the "name" field in data represents the month value
+      value1: 'Transaction 1', // this to indicate that the 'value1' field in data represents the Transcation 1
+      value2: 'Transaction 2' // similarly, 'value2' key here indicates that the 'value2' field in data represents Transaction 2
+      ...
     }
 
 4. Here we're looking at average spends over swiggy and zomato for each month
 Since there are two attributes for each entity, we have two items in values(value1, value2).
-2. {
+ {
     data: [
       {name: 'Jan', value1: 20,  value2: 40}, 
       {name: 'Feb': value1: 30,  value2: 50}, 
