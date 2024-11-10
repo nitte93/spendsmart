@@ -36,7 +36,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ['67.202.58.96', "127.0.0.1", "localhost", "https://spendsmart-fe.vercel.app/", "kharcha.up.railway.app"]
 
-
+CSRF_TRUSTED_ORIGINS = ["https://kharcha.up.railway.app"]
 # Application definition
 
 INSTALLED_APPS = [

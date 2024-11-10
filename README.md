@@ -6,6 +6,9 @@ TO launch the project
 
 4 - once migration is complete, you can run you r app using python3 manage.py runserver
 
+# Procfile
+web: gunicorn my_site.wsgi
+
 # spendsmart
 
 # ssh
