@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import upload_file, index,chat, list_customers_raw,read_db_content, run_sql_agent, DocumentListView,DocumentDetailView, upload_and_parse_excel_to_sql
+from .views import upload_file, index,chat, read_db_content, run_sql_agent, DocumentListView,DocumentDetailView, upload_and_parse_excel_to_sql
 
 urlpatterns = [
     # ex: /uploads/
