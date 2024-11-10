@@ -6,6 +6,8 @@ TO launch the project
 
 4 - once migration is complete, you can run you r app using python3 manage.py runserver
 
+
+5- python3 manage.py createsuperuser
 # Procfile
 web: gunicorn my_site.wsgi
 
