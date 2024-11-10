@@ -24,7 +24,7 @@ from django.db import connection
 from langchain.chains import create_sql_query_chain
 # from langchain_openai import ChatOpenAI
 # from sqlalchemy import create_engine
-from langchain.sql_database import SQLDatabase
+# from langchain.sql_database import SQLDatabase
 import urllib.parse
 from rest_framework.permissions import IsAuthenticated, AllowAny
 import logging
@@ -312,39 +312,39 @@ def read_db_content(request, document_name, format=None):
 
 
 
-def list_customers_raw(request):
-    with connection.cursor() as cursor:
+# def list_customers_raw(request):
+#     with connection.cursor() as cursor:
 
 
-        # Setup database
-        # db = SQLDatabase.from_uri(
-        #     f"postgresql+psycopg2://postgres:{env('dbpass')}@localhost:5433/tasks",
-        # )
-        # Formulate the connection string
-        username = "postgres"
-        hostname = "localhost"
-        database = "mysiteDB"
-        port = "5432"
-        connection_string = f"postgresql+psycopg2://{username}:{encoded_password}@{hostname}:{port}/{database}"
+#         # Setup database
+#         # db = SQLDatabase.from_uri(
+#         #     f"postgresql+psycopg2://postgres:{env('dbpass')}@localhost:5433/tasks",
+#         # )
+#         # Formulate the connection string
+#         username = "postgres"
+#         hostname = "localhost"
+#         database = "mysiteDB"
+#         port = "5432"
+#         connection_string = f"postgresql+psycopg2://{username}:{encoded_password}@{hostname}:{port}/{database}"
 
-        # db = SQLDatabase.from_uri('postgresql+psycopg2://postgres:Niharikaa@0823@localhost:5432/mysiteDB')
-        db = SQLDatabase.from_uri(connection_string)
-        chain = create_sql_query_chain(llm, db)
-        # response = chain.invoke({"question": "Give me all the distinct transactions that was done towards swiggy. Show the list without any Limit."})
-        # response = chain.invoke({"question": "You are an SQL expert, you are working with postgres database, you are given a database that contains the customers bank spending document. Give me all the distinct transactions that was done towards swiggy. Show the list without any Limit. Also while you're retrieving the documents, keep in mind that the transactions can be described in upper case or lower case. "})
-        response = chain.invoke({"question": "You are an SQL expert, you are working with postgres database, you are given a database that contains the customers bank spending document. Give me data for monthly expences for each month. Show the list without any Limit. Also while you're retrieving the documents, keep in mind that the transactions can be described in upper case or lower case. "})
+#         # db = SQLDatabase.from_uri('postgresql+psycopg2://postgres:Niharikaa@0823@localhost:5432/mysiteDB')
+#         db = SQLDatabase.from_uri(connection_string)
+#         chain = create_sql_query_chain(llm, db)
+#         # response = chain.invoke({"question": "Give me all the distinct transactions that was done towards swiggy. Show the list without any Limit."})
+#         # response = chain.invoke({"question": "You are an SQL expert, you are working with postgres database, you are given a database that contains the customers bank spending document. Give me all the distinct transactions that was done towards swiggy. Show the list without any Limit. Also while you're retrieving the documents, keep in mind that the transactions can be described in upper case or lower case. "})
+#         response = chain.invoke({"question": "You are an SQL expert, you are working with postgres database, you are given a database that contains the customers bank spending document. Give me data for monthly expences for each month. Show the list without any Limit. Also while you're retrieving the documents, keep in mind that the transactions can be described in upper case or lower case. "})
         
-        print("monthly expences", response)
-        # cursor.execute("SELECT * FROM uploads_transaction")
-        cursor.execute("SELECT DISTINCT t.reference_number FROM uploads_transaction t WHERE t.transaction_name LIKE '%swiggy%'")
-        # cursor.execute(response)
-        rows = cursor.fetchall()
-        output = db.run(response)
+#         print("monthly expences", response)
+#         # cursor.execute("SELECT * FROM uploads_transaction")
+#         cursor.execute("SELECT DISTINCT t.reference_number FROM uploads_transaction t WHERE t.transaction_name LIKE '%swiggy%'")
+#         # cursor.execute(response)
+#         rows = cursor.fetchall()
+#         output = db.run(response)
 
-    # toutput = [{'name': row[0], 'email': row[1], 'created_at': row[2]} for row in output]
+#     # toutput = [{'name': row[0], 'email': row[1], 'created_at': row[2]} for row in output]
 
-    customers = [{'name': row[0], 'email': row[1], 'created_at': row[2]} for row in rows]
-    return JsonResponse({'output': output, 'customers': customers, 'query':response})
+#     customers = [{'name': row[0], 'email': row[1], 'created_at': row[2]} for row in rows]
+#     return JsonResponse({'output': output, 'customers': customers, 'query':response})
 
 
 class DocumentListView(generics.ListAPIView):

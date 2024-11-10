@@ -1,3 +1,11 @@
+TO launch the project
+
+1 - setup postgres database
+2 -  add database connection creds to .env file
+3 - run python3 manage.py migrate for successful mogration
+
+4 - once migration is complete, you can run you r app using python3 manage.py runserver
+
 # spendsmart
 
 # ssh
