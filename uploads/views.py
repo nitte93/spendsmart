@@ -58,11 +58,13 @@ def index(request, question_id):
 
 @api_view(['GET'])
 def chat(request, document_name):
-    data = [{'message': 'Hello, world!', 'sender': 'admin'},
-            {'message': 'Hello Admin', 'sender': 'user'},
-            {'message': 'what is going on ?', 'sender': 'admin'}, 
-            {'message': 'Nothing, just Chatting to you.', 'sender': 'user'}, 
-            {'message': "what is the maximum amount I've spend on swiggy?", 'sender': 'admin'}]
+    data = [{'message': 'Hello, there!', 'sender': 'user'},
+            {'message': 'You can ask questions like:', 'sender': 'user'},
+            {'message': 'show me all my transactions with swiggy ?', 'sender': 'user'}, 
+            {'message': 'show me the count of debit and credit transactions for each month as bar chart', 'sender': 'user'}, 
+            {'message': "Show me the transactions categorised by their size Large( > 10000 ), Medium( 2000 - 10000), and Small( < 2000) as pie chart", 'sender': 'user'},
+            {'message': "show me the recurring transactions for each month etc", 'sender': 'user'},
+            ]
     return Response(data=data, status=status.HTTP_200_OK)
 
 

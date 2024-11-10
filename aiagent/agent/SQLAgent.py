@@ -253,8 +253,8 @@ Available chart types and their use cases:
 - Table: Ideal for showing list of items
              
 Consider these types of questions when recommending a visualization:
-1. Aggregations and Summarizations (e.g., "What is the average revenue by month?" - Line Graph)
-2. Comparisons (e.g., "Compare the sales figures of Product A and Product B over the last year." - Line or Column Graph)
+1. Aggregations and Summarizations (e.g., "What is the average debit amount by month?" - Line Graph)
+2. Comparisons (e.g., "Compare the debit amount towards Product A and Product B over the last year." - Line or Column Graph)
 3. Plotting Distributions (e.g., "Plot a distribution of the age of users" - Scatter Plot)
 4. Trends Over Time (e.g., "What is the trend in the number of active users over the past year?" - Line Graph)
 5. Proportions (e.g., "What is the market share of the products?" - Pie Chart)
