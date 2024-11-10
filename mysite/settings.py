@@ -16,7 +16,8 @@ import os
 import environ
 env = environ.Env()
 environ.Env.read_env()
-...
+
+
 # Your secret key
 SECRET_KEY = env("SECRET_KEY")
 
