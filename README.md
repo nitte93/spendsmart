@@ -1,10 +1,14 @@
-TO launch the project
+# To launch the project locally
 
 1 - setup postgres database
+
 2 - add database connection creds in .env file
+
 3 - run python3 manage.py migrate for successful mogration
+
 4 - once migration is complete, you can run your app using python3 manage.py runserver
 
+5 - Run the frontend https://github.com/nitte93/spendsmart-fe 
 
 5- python3 manage.py createsuperuser
 # Procfile
