@@ -1,10 +1,9 @@
 TO launch the project
 
 1 - setup postgres database
-2 -  add database connection creds to .env file
+2 - add database connection creds in .env file
 3 - run python3 manage.py migrate for successful mogration
-
-4 - once migration is complete, you can run you r app using python3 manage.py runserver
+4 - once migration is complete, you can run your app using python3 manage.py runserver
 
 
 5- python3 manage.py createsuperuser
